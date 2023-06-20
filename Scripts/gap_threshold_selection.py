@@ -28,7 +28,7 @@ def find_gaps(col, m):
     return gaps
 
 # Get the input file as an argument (collinear file)
-input_file = sys.argv[1]
+input_file = sys.argv[sys.argv.index('-i') + 1]
 
 # Convert the collinear file to a dataframe
 C_df_csv = pd.read_csv(input_file, sep=' ', header=None)
