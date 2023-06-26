@@ -387,6 +387,10 @@ window\_size\_subgenome3 -wup window\_up -wdwn window\_down
 Note: Before running main\_script.py, you need to run the
 SyntenyLink\_bf.pl and SyntenyLink\_st.pl scripts
 
+To run SyntenyLink\_sb.py you can simply use:
+
+    $ python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast -a1 -a1 -a1 -a2 -a2 -a2 -ws1 -ws2 -ws3 -wup -wdwn
+
 \- Output The execution of main\_script outputs all the output files of
 the above scripts in the same directory as the input file.
 
@@ -398,6 +402,10 @@ placement of genes in subgenomes when there is a ground truth file.
 
 \- Usage One read in file: abc\_groundtruth.xlsx
 
+To run SyntenyLink\_sb.py you can simply use:
+
+    $ python3 SyntenyLink_acc.py abc_groundtruth.xlsx
+
 \- Output The execution of SyntenyLink\_sb prints the subgenome
 placemnet accuracy of each subgenome
 
@@ -408,5 +416,5 @@ placemnet accuracy of each subgenome
 > subgenome3: 65.30% Exact match number for subgenome3: 5635 Missing
 > genes for subgenome3: 2995
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -
 Example
+=======
