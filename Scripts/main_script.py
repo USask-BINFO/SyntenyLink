@@ -114,7 +114,6 @@ def main():
 
     for k in range(n_subgenomes):
         sb.subgenome_assignment_all_BP(f"Super_synteny_graph_nodes_sub{k+1}.xlsx", f"abc_synteny_chromosome_names.success.colinear{k+1}.xlsx", small_BP_sub[k], f"subgenome_placement_blocks.all.sub{k+1}.xlsx")
-
     print("=========================================")
     print("Number of small + main blocks:" , len(pd.read_excel("subgenome_placement_blocks.all.sub1.xlsx")))
     print("=========================================")
@@ -151,7 +150,7 @@ def main():
     df_subgenome = sb.check_neighbourhoods(output_final_df, window_size_sub1, window_size_sub2, window_size_sub3)
     df_subgenome.to_excel("subgenome_placement_blocks.all.xlsx")
 
-    # Read the specified range of cells into a pandas DataFrame
+    # # Read the specified range of cells into a pandas DataFrame
     df = pd.read_excel("subgenome_placement_blocks.all.xlsx", header= None, usecols="E:G", skiprows=1)
 
     # Convert the DataFrame to a NumPy array
@@ -159,8 +158,8 @@ def main():
     len_subgenomes = len(subgenomes[:,0])
     print(len_subgenomes)
 
-    window_up= window_size_sub1
-    window_down= window_size_sub2
+    window_up= int(sys.argv[sys.argv.index('-wup') + 1])
+    window_down= int(sys.argv[sys.argv.index('-wdwn') + 1])
     arg_max_count_2=np.array([-1,-1,-1])
     for k in range(len_subgenomes):
         if k<window_up:
@@ -215,9 +214,27 @@ def main():
     df_new_2['subgenome3']=subgenomes[:,2]
     df_new_2.to_excel("Final_subgenome_placement_result.xlsx")
 
-    #If there exist a ground truth file, then compare the results with the ground truth
+    # Read the data
+    df_subgenome_density = pd.read_excel("subgenome_placement_blocks.all.xlsx")
+
+    # Create a list of subgenomes
+    subgenomes = [[] for _ in range(n_subgenomes)]
+
+    for i in range(len(df_subgenome_density["Row start #"])):
+        for j in range(df_subgenome_density["Row start #"].values[i], df_subgenome_density["Row end #"].values[i] + 1):
+            for k in range(n_subgenomes):
+                subgenomes[k].append(df_synteny[df_subgenome_density[f"subgenome{k+1}"].values[i]][j])
+
+    # Create a dataframe of subgenomes
+    df_subgenome = pd.DataFrame(subgenomes).transpose()
+
+    # Change the column names
+    df_subgenome.columns = [f"subgenome{i+1}" for i in range(n_subgenomes)]
+    df_subgenome.to_excel("Final_result.xlsx")
+
+    # #If there exist a ground truth file, then compare the results with the ground truth
     # GT = sys.argv[sys.argv.index('-gt') + 1]
-    # acc.subgenome_overlap(GT,"Final_subgenome_placement_result.xlsx", df_synteny, 3)
+    # acc.subgenome_overlap(GT,"subgenome_placement_blocks.all.xlsx", df_synteny, 3)
 
 if __name__ == '__main__':
     main()
