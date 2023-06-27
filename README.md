@@ -71,7 +71,7 @@ results, the number of BLASTP hits for a gene should be restricted to
 around top 5. When you have abc.blast ready, put them in the same
 folder. Then you can simply use:
 
-    $ python3 ./SyntenyLink_bf.pl dir/abc.blast
+    $ ./SyntenyLink_bf.pl dir/abc.blast
 
 \- Output The execution of SyntenyLink\_bf outputs one blast file
 abc\_blast\_filtered.txt, containing filtered blast hits as follows:
@@ -407,14 +407,17 @@ To run SyntenyLink\_sb.py you can simply use:
     $ python3 SyntenyLink_acc.py abc_groundtruth.xlsx
 
 \- Output The execution of SyntenyLink\_sb prints the subgenome
-placemnet accuracy of each subgenome
+placemnet accuracy of each subgenome:
 
-> Exact match percentage for subgenome1: 84.15% Exact match number for
-> subgenome1: 11490 Missing genes for subgenome1: 2164 Exact match
-> percentage for subgenome2: 61.61% Exact match number for subgenome2:
-> 6062 Missing genes for subgenome2: 3778 Exact match percentage for
-> subgenome3: 65.30% Exact match number for subgenome3: 5635 Missing
-> genes for subgenome3: 2995
+    Exact match percentage for subgenome1: 84.15%
+    Exact match number for subgenome1: 11490
+    Missing genes for subgenome1: 2164
+    Exact match percentage for subgenome2: 61.61%
+    Exact match number for subgenome2: 6062
+    Missing genes for subgenome2: 3778
+    Exact match percentage for subgenome3: 65.30%
+    Exact match number for subgenome3: 5635
+    Missing genes for subgenome3: 2995
 
 Example
 =======
