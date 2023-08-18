@@ -300,15 +300,15 @@ The modified\_chr\_names{k+1}.xlsx file holds the
 replaced gene id\'s with there corresponding chromosome names which they
 bellong to if they are not already placed inside the subgenome columns (to detect the genes that has been removed based on density threshold):
 
-Gene_id	N1	N1.r	N2	N2.r	N3	N3.r	N4	N4.r	N5	N5.r	N6	N6.r	N7	N7.r
-AT1G01900	0	0	0	0	0	0	0	0	0	1	0	0	0	0
-AT1G01910	0	0	0	0	0	0	0	0	0	0	0	1	0	0
-AT1G01920	0	0	0	0	0	0	0	0	0	0	0	1	0	0
-AT1G01930	0	0	0	0	0	0	0	0	0	0	0	1	0	0
-AT1G01940	0	0	0	0	0	0	0	0	0	0	0	1	0	0
-AT1G01950	0	0	0	0	0	0	0	0	0	0	N6	0	0	0
-AT1G01960	0	0	0	0	0	0	0	0	0	0	0	1	0	0
-AT1G01970	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+    Gene_id	N1	N1.r	N2	N2.r	N3	N3.r	N4	N4.r	N5	N5.r	N6	N6.r	N7	N7.r
+    AT1G01900	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+    AT1G01910	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+    AT1G01920	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+    AT1G01930	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+    AT1G01940	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+    AT1G01950	0	0	0	0	0	0	0	0	0	0	N6	0	0	0
+    AT1G01960	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+    AT1G01970	0	0	0	0	0	0	0	0	0	1	0	0	0	0
 
 The subgenome\_placement\_blocks.all{k+1}.xlsx file holds the placement
 of genes in subgenomes optimal for each subgenome considering the subgenome separation optimal for each subgenome in step 4:
