@@ -291,20 +291,27 @@ of small blocks, small synteny blocks are incorporated into the
 corresponding super-synteny blocks, taking into account the subgenome
 placement of the super-synteny blocks as a reference.
 
-\- Usage No read in files Three input parameters: ws1, ws2 and ws3.
-
-Note: You need to select the most suitable window size parameters for
-subgenome1, subgenome2 and subgenome3.
+\- Usage No read in files or parameters.
 
 \- Output The execution of SyntenyLink\_sb outputs number of output
-files: abc\_synteny\_chromosome\_names.success.colinear.xlsx,
-subgenome\_placement\_blocks.all.xlsx and
-subgenome\_placement\_blocks.all\_sub{k}.xlsx; There will be m number of
-files. k represents the corresponding subgenome number.
+files: modified\_chr\_names{k+1}.xlsx, subgenome\_placement\_blocks.all{k+1}.xlsx, subgenome\_placement\_blocks.all.xlsx. k represents the corresponding subgenome number.
 
-The abc\_synteny\_chromosome\_names.success.colinear.xlsx file holds the
+The modified\_chr\_names{k+1}.xlsx file holds the
 replaced gene id\'s with there corresponding chromosome names which they
-bellong to:
+bellong to if they are not already placed inside the subgenome columns (to detect the genes that has been removed based on density threshold):
+
+Gene_id	N1	N1.r	N2	N2.r	N3	N3.r	N4	N4.r	N5	N5.r	N6	N6.r	N7	N7.r
+AT1G01900	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+AT1G01910	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+AT1G01920	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+AT1G01930	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+AT1G01940	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+AT1G01950	0	0	0	0	0	0	0	0	0	0	N6	0	0	0
+AT1G01960	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+AT1G01970	0	0	0	0	0	0	0	0	0	1	0	0	0	0
+
+The subgenome\_placement\_blocks.all{k+1}.xlsx file holds the placement
+of genes in subgenomes optimal for each subgenome considering the subgenome separation optimal for each subgenome in step 4:
 
     Row start # Row end #   subgenome1  subgenome2  subgenome3
     0   123 N10.r   N9  N8.r
@@ -318,12 +325,6 @@ of genes in subgenomes in step 5:
     0   123 N10.r   N9  N8.r
     124 698 N10 N8.r    N9.r
     699 1029    N6  N9.r    N8.r
-
-The subgenome\_placement\_blocks.all\_sub{k}.xlsx file holds the optimal placement of genes in subgenomes for each subgenome. Ex: subgenome\_placement\_blocks.all\_sub1.xlsx::
-
-:   Row start \# Row end \# subgenome1 subgenome2 subgenome3 0 75 N10.r
-    N9 N8.r 76 78 N10.r N9.r N8.r 79 123 N10.r N9 N8.r 124 698 N10 N9.r
-    N8.r
 
 SyntenyLink\_mn
 ---------------
@@ -414,5 +415,3 @@ placemnet accuracy of each subgenome:
     Exact match number for subgenome3: 5635
     Missing genes for subgenome3: 2995
 
-Example
-=======
