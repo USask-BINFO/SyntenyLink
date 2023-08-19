@@ -45,7 +45,7 @@ The following is the list of executable programs
 12. [minimum\_block\_length\_selection.py](#[minimum\_block\_length\_selection.py)
 
 ## SyntenyLink\_bf
-===============
+---------------
 
 This program, detects homologs between two species with blastp and
 involves a filtering step focusing on bit score and e-value to remove
