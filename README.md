@@ -426,9 +426,11 @@ placemnet accuracy of each subgenome:
 
 ## Contact 📬
 ===============
+
 For any questions or inquiries, please feel free to open an issue on our repository or contact us at [qnm481@usask.ca](mailto:qnm481@usask.ca).
 
 ## License 📜
 ===============
+
 This project is licensed under the [MIT License](LICENSE)
 
