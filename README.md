@@ -4,9 +4,12 @@ SyntenyLink 🧬
 ## Table of Contents 📚
 
 1. [Overview](#overview)
-2. [Main programs](#main programs)
-3. [Contact](#contact)
-4. [License](#license)
+2. [Requirements](#requirements)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Main programs](#main programs)
+6. [Contact](#contact)
+7. [License](#license)
 
 ## Overview 📖
 ===========
@@ -24,6 +27,51 @@ Mac OS. Usage or help information are well built into the programs. 💻
 
 All code is copiable, distributable, modifiable, and usable without any
 restrictions. 
+
+## Requirements 🛠️
+
+To use SyntenyLink, ensure you have the following requirements:
+
+- Python 3.9
+- biopython==1.80
+- ipython==8.3.0
+- matplotlib==3.5.2
+- numpy==1.21.5
+- pandas==1.4.2
+- seaborn==0.11.2
+- pickle
+- csv
+- os
+- math
+- sys
+- re
+- warnings
+- wandb
+
+## Installation ⚙️
+
+1. Clone this repository to your local machine:
+
+```bash
+git clone https://github.com/USask-BINFO/AcrTransAct.git
+cd AcrTransAct
+```
+
+2. Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Reproduce all the experiments:
+
+```bash
+bash code/scripts/training.bash
+```
+## Usage 🚀
+
+Utilize this repository to replicate our experiments and explore the functionalities of AcrTransAct. The codebase is organized to help you easily navigate through different components and reproduce our results.
+
 
 The following is the list of executable programs
 ------------------------------------------------
