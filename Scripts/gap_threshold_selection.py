@@ -31,7 +31,7 @@ def find_gaps(col, m):
 input_file = sys.argv[sys.argv.index('-i') + 1]
 
 # Convert the collinear file to a dataframe
-C_df_csv = pd.read_csv(input_file, sep=' ', header=None)
+C_df_csv = pd.read_csv(input_file, sep='\t')
 # Make a copy of the dataframe
 C_df = C_df_csv.copy()
 C_df_updated = C_df.iloc[1:, 1:-3]
@@ -44,76 +44,91 @@ C_df_updated = C_df_updated.replace(r'^[a-zA-Z]', 1, regex=True)
 # Set first row index starts from 0
 C_df_updated.index = C_df_updated.index - 1
 
-# Convert the dataframe to a numpy array
-C = C_df_updated.to_numpy()
-m, n = C.shape
-print(m, n)
+# Split the dataframe based on the first letter of column names
+dfs = {}
+for column in C_df_updated.columns:
+    print(column)
+    first_letter = column[0]
+    if first_letter not in dfs:
+        dfs[first_letter] = pd.DataFrame()
+    dfs[first_letter][column] = C_df_updated[column]
 
-gaps_cell = [find_gaps(C[:, i], m) for i in range(n)]
+# Print the resulting dataframes
+for key, value in dfs.items():
+    first_letter_get = key
+    print(f"Dataframe with columns starting with '{key}':")
+    print(value)
+    print()
+    # Convert the dataframe to a numpy array
+    C = value.to_numpy()
+    m, n = C.shape
+    print(m, n)
 
-# Calculate frequency of gaps inside each block
-freqs = []
+    gaps_cell = [find_gaps(C[:, i], m) for i in range(n)]
 
-for gaps in gaps_cell:
-    # Ignore gaps equal to zero
-    gaps = [gap for gap in gaps if gap > 20]
-    freqs.extend(gaps)
+    # Calculate frequency of gaps inside each block
+    freqs = []
 
-unique_gaps, gap_counts = np.unique(freqs, return_counts=True)
+    for gaps in gaps_cell:
+        # Ignore gaps equal to zero
+        gaps = [gap for gap in gaps if gap > 20]
+        freqs.extend(gaps)
 
-# Find the gap length for maximum, mean, and median frequency
-max_gap_length = unique_gaps[np.argmax(gap_counts)]
-mean_gap_length = np.mean(unique_gaps)
-median_gap_length = np.median(unique_gaps)
+    unique_gaps, gap_counts = np.unique(freqs, return_counts=True)
 
-max_gap_freq = np.max(gap_counts)
-mean_gap_freq = np.mean(gap_counts)
-median_gap_freq = np.median(gap_counts)
+    # Find the gap length for maximum, mean, and median frequency
+    max_gap_length = unique_gaps[np.argmax(gap_counts)]
+    mean_gap_length = np.mean(unique_gaps)
+    median_gap_length = np.median(unique_gaps)
 
-print("Gap Length for Maximum Frequency:", max_gap_length)
-print("Gap Length for Mean Frequency:", mean_gap_length)
-print("Gap Length for Median Frequency:", median_gap_length)
-print("Max Frequency:", max_gap_freq)
-print("Mean Frequency:", mean_gap_freq)
-print("Median Frequency:", median_gap_freq)
+    max_gap_freq = np.max(gap_counts)
+    mean_gap_freq = np.mean(gap_counts)
+    median_gap_freq = np.median(gap_counts)
 
-# Find the index of the gap length closest to the gap length with maximum frequency
-index_max_gap = np.argmax(gap_counts)
+    print("Gap Length for Maximum Frequency:", max_gap_length)
+    print("Gap Length for Mean Frequency:", mean_gap_length)
+    print("Gap Length for Median Frequency:", median_gap_length)
+    print("Max Frequency:", max_gap_freq)
+    print("Mean Frequency:", mean_gap_freq)
+    print("Median Frequency:", median_gap_freq)
 
-# Calculate the start and end indices for the range
-start_index = max(0, index_max_gap - 10)
-end_index = min(len(unique_gaps), index_max_gap + 20)
+    # Find the index of the gap length closest to the gap length with maximum frequency
+    index_max_gap = np.argmax(gap_counts)
 
-# Extend the x-axis range
-extended_start = max(0, start_index - 1)
-extended_end = min(len(unique_gaps), end_index + 1)
+    # Calculate the start and end indices for the range
+    start_index = max(0, index_max_gap - 10)
+    end_index = min(len(unique_gaps), index_max_gap + 20)
 
-# Extract the range of values around the maximum gap length
-plot_gaps = unique_gaps[extended_start:extended_end]
-plot_counts = gap_counts[extended_start:extended_end]
+    # Extend the x-axis range
+    extended_start = max(0, start_index - 1)
+    extended_end = min(len(unique_gaps), end_index + 1)
 
-# Plotting frequency of gaps within the extended range
-fig, ax = plt.subplots(figsize=(10, 6))
+    # Extract the range of values around the maximum gap length
+    plot_gaps = unique_gaps[extended_start:extended_end]
+    plot_counts = gap_counts[extended_start:extended_end]
 
-# Connect the points to form a curve
-ax.plot(plot_gaps, plot_counts, marker='o', linestyle='-', linewidth=2)
+    # Plotting frequency of gaps within the extended range
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Connect the points to form a curve
+    ax.plot(plot_gaps, plot_counts, marker='o', linestyle='-', linewidth=2)
 
 
-# Add a red dashed line indicating the peak value
-peak_gap = unique_gaps[index_max_gap]
-ax.axvline(peak_gap, color='red', linestyle='--', linewidth=3)
+    # Add a red dashed line indicating the peak value
+    peak_gap = unique_gaps[index_max_gap]
+    ax.axvline(peak_gap, color='red', linestyle='--', linewidth=3)
 
-# Add text annotation for the peak value
-peak_count = gap_counts[index_max_gap]
-ax.text(peak_gap, peak_count, f'Peak: {max_gap_length}', color='red', ha='center', va='bottom', fontsize=15)
+    # Add text annotation for the peak value
+    peak_count = gap_counts[index_max_gap]
+    ax.text(peak_gap, peak_count, f'Peak: {max_gap_length}', color='red', ha='center', va='bottom', fontsize=15)
 
-ax.set_xlim(plot_gaps.min(), plot_gaps.max())  # Set x-axis limits to the extended range
-ax.set_xlabel('Gap Length', fontsize=12)
-ax.set_ylabel('Frequency', fontsize=12)
-ax.set_title('Frequency of Gap Lengths', fontsize=16)
-ax.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
+    ax.set_xlim(plot_gaps.min(), plot_gaps.max())  # Set x-axis limits to the extended range
+    ax.set_xlabel('Gap Length', fontsize=12)
+    ax.set_ylabel('Frequency', fontsize=12)
+    ax.set_title('Frequency of Gap Lengths', fontsize=16)
+    ax.grid(True, linestyle='--', linewidth=0.5, alpha=0.7)
 
-plt.show()
+    plt.show()
 
-# Save plot as figure
-fig.savefig('gap_frequency.png', dpi=300, bbox_inches='tight')
+    # Save plot as figure
+    fig.savefig(f'{first_letter_get}_gap_frequency.png', dpi=300, bbox_inches='tight')
