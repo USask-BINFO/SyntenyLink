@@ -1,17 +1,19 @@
-SyntenyLink
-===========
+SyntenyLink 🧬
+=============
 
-Overview
-========
+Overview 📖
+===========
 
 The SyntenyLink package has six major components: the SyntenyLink
 algorithm allows users to handle reconstruct subgenomes of polyploid
 species more conveniently and to separate the set of genes belong to
 each subgenome in the organism with the aid of reference proteomes of
-polyploid species and related ancestor.
+polyploid species and related ancestor. 🌱
+
+![Pipeline](figs/pipeline_Algo.png)
 
 All programs are executed using command line options on Linux systems or
-Mac OS. Usage or help information are well built into the programs.
+Mac OS. Usage or help information are well built into the programs. 💻
 
 All code is copiable, distributable, modifiable, and usable without any
 restrictions. Contact: 
@@ -415,3 +417,28 @@ placemnet accuracy of each subgenome:
     Exact match number for subgenome3: 5635
     Missing genes for subgenome3: 2995
 
+
+License (MIT) 📜
+===============
+MIT License
+
+Copyright (c) [year] [fullname]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+===========
