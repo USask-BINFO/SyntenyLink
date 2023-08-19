@@ -4,18 +4,8 @@ SyntenyLink 🧬
 ## Table of Contents 📚
 
 1. [Overview](#overview)
-2. [Main programs] (#main programs)
-3. [SyntenyLink\_bf.pl] (#syntenyLink\_bf.pl) 
-4. [SyntenyLink\_st.pl] (#syntenyLink\_st.pl)
-5. [SyntenyLink\_mbp.py] (#syntenyLink\_mbp.py)
-6. [SyntenyLink\_wg.py] (#syntenyLink\_wg.py)
-7. [SyntenyLink\_sb.py] (#syntenyLink\_sb.py)
-8. [SyntenyLink\_mn.py] (#syntenyLink\_mn.py)
-9. [main\_script.py] (#main\_script.py)
-10. [SyntenyLink\_acc.py] (#syntenyLink\_acc.py)
-11. [gap\_threshold\_selection.py] (#gap\_threshold\_selection.py)
-12. [minimum\_block\_length\_selection.py] (#[minimum\_block\_length\_selection.py)
-13. [License](#license)
+2. [Main programs](#main programs)
+3. [License](#license)
 
 ## Overview 📖
 ===========
@@ -37,21 +27,21 @@ restrictions. Contact:
 The following is the list of executable programs
 ------------------------------------------------
 
-**Main programs (in the Scripts folder)**
-
--   SyntenyLink\_bf.pl 
--   SyntenyLink\_st.pl
--   SyntenyLink\_mbp.py
--   SyntenyLink\_wg.py
--   SyntenyLink\_sb.py
--   SyntenyLink\_mn.py
--   main\_script.py
--   SyntenyLink\_acc.py
--   gap\_threshold\_selection.py
--   minimum\_block\_length\_selection.py
-
 ## Main programs
 =============
+
+**Main programs (in the Scripts folder)**
+
+1. [SyntenyLink\_bf.pl](#syntenyLink\_bf.pl) 
+2. [SyntenyLink\_st.pl](#syntenyLink\_st.pl)
+3. [SyntenyLink\_mbp.py](#syntenyLink\_mbp.py)
+4. [SyntenyLink\_wg.py](#syntenyLink\_wg.py)
+5. [SyntenyLink\_sb.py](#syntenyLink\_sb.py)
+6. [SyntenyLink\_mn.py](#syntenyLink\_mn.py)
+7. [main\_script.py](#main\_script.py)
+8. [SyntenyLink\_acc.py](#syntenyLink\_acc.py)
+9. [gap\_threshold\_selection.py](#gap\_threshold\_selection.py)
+12. [minimum\_block\_length\_selection.py](#[minimum\_block\_length\_selection.py)
 
 ## SyntenyLink\_bf
 ===============
