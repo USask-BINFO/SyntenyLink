@@ -1,7 +1,23 @@
 SyntenyLink 🧬
 =============
 
-Overview 📖
+## Table of Contents 📚
+
+1. [Overview](#overview)
+2. [Main programs] (#main programs)
+3. [SyntenyLink\_bf.pl] (#syntenyLink\_bf.pl) 
+4. [SyntenyLink\_st.pl] (#syntenyLink\_st.pl)
+5. [SyntenyLink\_mbp.py] (#syntenyLink\_mbp.py)
+6. [SyntenyLink\_wg.py] (#syntenyLink\_wg.py)
+7. [SyntenyLink\_sb.py] (#syntenyLink\_sb.py)
+8. [SyntenyLink\_mn.py] (#syntenyLink\_mn.py)
+9. [main\_script.py] (#main\_script.py)
+10. [SyntenyLink\_acc.py] (#syntenyLink\_acc.py)
+11. [gap\_threshold\_selection.py] (#gap\_threshold\_selection.py)
+12. [minimum\_block\_length\_selection.py] (#[minimum\_block\_length\_selection.py)
+13. [License](#license)
+
+## Overview 📖
 ===========
 
 The SyntenyLink package has six major components: the SyntenyLink
@@ -34,10 +50,10 @@ The following is the list of executable programs
 -   gap\_threshold\_selection.py
 -   minimum\_block\_length\_selection.py
 
-Main programs
+## Main programs
 =============
 
-SyntenyLink\_bf
+## SyntenyLink\_bf
 ===============
 
 This program, detects homologs between two species with blastp and
@@ -77,7 +93,7 @@ abc\_blast\_filtered.txt, containing filtered blast hits as follows:
     BraA01g000010.3C    AT3G04630.1 66.087  115 21  4   194 297 165 272 7.06e-33    125
     BraA01g000010.3C    AT3G04630.3 66.087  115 21  4   194 297 164 271 7.88e-33    125
 
-SyntenyLink\_st
+## SyntenyLink\_st
 ---------------
 
 This program uses the output after performing synteny analysis using
@@ -176,7 +192,7 @@ DAGchainer:
     A1_Chr1_1   A1  BraA01g026890.3C    17191267    17191318    Chr1    AT1G57550.1 21312544    21312593    3.270000e-24    40
     A1_Chr1_1   A1  BraA01g026900.3C    17196325    17196618    Chr1    AT1G57610.3 21337612    21337818    8.840000e-106   84
 
-SyntenyLink\_mbp
+## SyntenyLink\_mbp
 ----------------
 
 This program identifies the main breakpoints of translocations in the
@@ -236,7 +252,7 @@ after removing the noise taking density threshold into account:
     2   AT1G11870   AT1G13420   1162    1328    167 0   0   0   0   0   0   0   0   0   0.523809524 0   0   0   0   0.386904762 0.43452381  0   0   3   N5.r    N8.r    N8
     3   AT1G13430   AT1G19470   1329    1957    629 0   0   0   0   0   0   0   0   0.598412698 0   0   0   0   0   0.33968254  0.422222222 0   0   3   N5  N8.r    N8
 
-SyntenyLink\_wg
+## SyntenyLink\_wg
 ---------------
 
 This program uses a weighted direct graph to dynamically link blocks
@@ -280,7 +296,7 @@ belong to each subgenome after traversing the graph:
     124 698 N10 N8.r    N9.r
     699 1029    N6  N9.r    N8.r
 
-SyntenyLink\_sb
+## SyntenyLink\_sb
 ---------------
 
 This program retrieves genes "hidden" in small blocks that are missed in
@@ -328,7 +344,7 @@ of genes in subgenomes in step 5:
     124 698 N10 N8.r    N9.r
     699 1029    N6  N9.r    N8.r
 
-SyntenyLink\_mn
+## SyntenyLink\_mn
 ---------------
 
 Aimed to optimize the subgenome placements for each block (a row in the
@@ -372,7 +388,7 @@ blocks in subgenomes:
     BraA10g000780.3C    BraA09g065970.3C    x
     BraA10g000770.3C    BraA09g065980.3C    x
 
-main\_script
+## main\_script
 ------------
 
 This holds the main script that runs all the above scripts in order. It
@@ -392,7 +408,7 @@ To run SyntenyLink\_sb.py you can simply use:
 \- Output The execution of main\_script outputs all the output files of
 the above scripts in the same directory as the input file.
 
-SyntenyLink\_acc
+## SyntenyLink\_acc
 ----------------
 
 This holds the script that calculates the accuracy of the final
