@@ -418,7 +418,7 @@ placemnet accuracy of each subgenome:
     Missing genes for subgenome3: 2995
 
 
-License (MIT) 📜
+License 📜
 ===============
 This project is licensed under the [MIT License](LICENSE)
 
