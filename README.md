@@ -29,6 +29,7 @@ All code is copiable, distributable, modifiable, and usable without any
 restrictions. 
 
 ## Requirements 🛠️
+=============
 
 To use SyntenyLink, ensure you have the following requirements:
 
@@ -49,6 +50,7 @@ To use SyntenyLink, ensure you have the following requirements:
 - wandb
 
 ## Installation ⚙️
+=============
 
 1. Clone this repository to your local machine:
 
@@ -69,6 +71,7 @@ pip install -r requirements.txt
 python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast -w1s1 -w2s1 -w1s2 -w2s2 -w1s3 -w2s3
 ```
 ## Usage 🚀
+=============
 
 Utilize this repository to replicate our experiments and explore the functionalities of SyntenyLink. The codebase is organized to help you easily navigate through different components and reproduce our results.
 
