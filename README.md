@@ -5,7 +5,8 @@ SyntenyLink 🧬
 
 1. [Overview](#overview)
 2. [Main programs](#main programs)
-3. [License](#license)
+3. [Contact](#contact)
+4. [License](#license)
 
 ## Overview 📖
 ===========
@@ -22,7 +23,7 @@ All programs are executed using command line options on Linux systems or
 Mac OS. Usage or help information are well built into the programs. 💻
 
 All code is copiable, distributable, modifiable, and usable without any
-restrictions. Contact: 
+restrictions. 
 
 The following is the list of executable programs
 ------------------------------------------------
@@ -423,8 +424,11 @@ placemnet accuracy of each subgenome:
     Exact match number for subgenome3: 5635
     Missing genes for subgenome3: 2995
 
+## Contact 📬
+===============
+For any questions or inquiries, please feel free to open an issue on our repository or contact us at [qnm481@usask.ca](mailto:qnm481@usask.ca).
 
-License 📜
+## License 📜
 ===============
 This project is licensed under the [MIT License](LICENSE)
 
