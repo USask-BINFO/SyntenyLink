@@ -8,10 +8,9 @@ import re
 import math
 import random
 
-def subgenome_overlap(GT_file_path, df_subgenome_density_file_path, df_synteny, num_subgenomes):
+def subgenome_overlap(GT_file_path, df_subgenome_density_file_path, df_synteny, num_subgenomes, first_letter_get):
     # Read the data
     df_subgenome_density = pd.read_excel(df_subgenome_density_file_path)
-
     # Create a list of subgenomes
     subgenomes = [[] for _ in range(num_subgenomes)]
 
@@ -26,6 +25,8 @@ def subgenome_overlap(GT_file_path, df_subgenome_density_file_path, df_synteny, 
     # Change the column names
     df_subgenome.columns = [f"subgenome{i+1}" for i in range(num_subgenomes)]
     # print(df_subgenome)
+    #save df_subgenome as an excel file
+    df_subgenome.to_excel("final_result.xlsx")
 
     # Load the dataframes
     df_groundtruth = pd.read_excel(GT_file_path) # dataframe for groundtruth
@@ -39,7 +40,7 @@ def subgenome_overlap(GT_file_path, df_subgenome_density_file_path, df_synteny, 
 
         for i, row_groundtruth in df_groundtruth.iterrows():
             if i < len(df_groundtruth) - 1:
-                    gene_id_groundtruth = row_groundtruth[f"subgenome{j+1}"]
+                    gene_id_groundtruth = row_groundtruth[f"{first_letter_get}_subgenome{j+1}"]
                     if gene_id_groundtruth != 'x':
                         total_genes += 1
                         if i < len(df_subgenome):
@@ -58,7 +59,7 @@ def subgenome_overlap(GT_file_path, df_subgenome_density_file_path, df_synteny, 
         print(f"Exact match number for subgenome{j+1}: {exact_matches}")
         print(f"Missing genes for subgenome{j+1}: {missing_genes}")
 
-def subgenome_overlap_separate(GT_file_path, df_subgenome_density_file_path, df_synteny, num_subgenomes, s):
+def subgenome_overlap_separate(GT_file_path, df_subgenome_density_file_path, df_synteny, num_subgenomes, s, first_letter_get):
     # Read the data
     df_subgenome_density = pd.read_excel(df_subgenome_density_file_path)
 
@@ -88,7 +89,7 @@ def subgenome_overlap_separate(GT_file_path, df_subgenome_density_file_path, df_
 
     for i, row_groundtruth in df_groundtruth.iterrows():
         if i < len(df_groundtruth) - 1:
-                gene_id_groundtruth = row_groundtruth[f"subgenome{s+1}"]
+                gene_id_groundtruth = row_groundtruth[f"{first_letter_get}_subgenome{s+1}"]
                 if gene_id_groundtruth != 'x':
                     total_genes += 1
                     if i < len(df_subgenome):
