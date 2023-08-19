@@ -23,7 +23,7 @@ The following is the list of executable programs
 
 **Main programs (in the Scripts folder)**
 
--   SyntenyLink\_bf.pl
+-   SyntenyLink\_bf.pl (#overview)
 -   SyntenyLink\_st.pl
 -   SyntenyLink\_mbp.py
 -   SyntenyLink\_wg.py
@@ -420,5 +420,5 @@ placemnet accuracy of each subgenome:
 
 License (MIT) 📜
 ===============
-This project is licensed under the /License
+This project is licensed under the [MIT License](LICENSE)
 
