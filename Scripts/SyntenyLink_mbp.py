@@ -111,8 +111,8 @@ def get_densities(C, break_point_indices, n , m):
             ).astype(float)
     return densities
 
-def create_excel_sheet(C_df, break_point_indices, densities, C_df_updated_copy):
-    # calculate row_end indices as in excel sheet
+def create_excel_sheet(C_df, break_point_indices, densities, value):
+# calculate row_end indices as in excel sheet
     row_end = (break_point_indices[: len(break_point_indices)]
     ).astype(int)
     # row_end=np.append(row_end[:-1]+1)
@@ -124,7 +124,7 @@ def create_excel_sheet(C_df, break_point_indices, densities, C_df_updated_copy):
     number_genes = (row_end - row_start+1).astype(int)
 
     # read gene IDs from the given file
-    gene_id = C_df.iloc[1:,0]
+    gene_id = C_df.iloc[:,0]
     gene_id = gene_id.to_numpy()
     # prepare data for gene_start and gene_end columns for excel sheet
     gene_start = []
@@ -156,11 +156,11 @@ def create_excel_sheet(C_df, break_point_indices, densities, C_df_updated_copy):
     ]
 
     # Extract the prefix letter from the column names using regex
-    prefixes = set((re.findall(r'^[A-Za-z]', col)[0], int(re.findall(r'\d+', col)[0])) for col in C_df_updated_copy.columns)
+    prefixes = set((re.findall(r'^[A-Za-z]', col)[0], int(re.findall(r'\d+', col)[0])) for col in value.columns)
     prefixes = sorted(set([f'N{suffix}' if suffix % 2 == 1 else f'N{suffix}.r' for _, suffix in prefixes]))
 
     # Sort the columns by the letter prefix and the number following the letter
-    cols = sorted(C_df_updated_copy.columns, key=lambda col: (re.findall(r'^[A-Za-z]', col)[0], int(re.findall(r'\d+', col)[0])))
+    cols = sorted(value.columns, key=lambda col: (re.findall(r'^[A-Za-z]', col)[0], int(re.findall(r'\d+', col)[0])))
 
     # Loop through the columns and update the header list
     for i in range(0, len(cols), 2):
@@ -169,7 +169,7 @@ def create_excel_sheet(C_df, break_point_indices, densities, C_df_updated_copy):
 
     # write matrix to excel sheet
     df = pd.DataFrame(E, columns=header)
-    df.to_excel(f"Super_synteny_block_output.xlsx",
+    df.to_excel("Super_synteny_block_output.xlsx",
                 sheet_name="Output", startrow = 0, startcol=0)
 
 def get_subgenomes(filepath, num_subgenomes):
@@ -184,10 +184,21 @@ def get_subgenomes(filepath, num_subgenomes):
     subgenomes (list): A list of subgenomes
     '''
     # Read the generated break point output
-    df_temp = pd.read_excel(filepath, usecols="H:AA")
+
+    # Read the Excel file and determine the number of columns with data
+    df_temp = pd.read_excel(filepath)
+    num_columns = df_temp.shape[1]
+
+    # Read the Excel file again with the determined number of columns
+    df_temp = pd.read_excel(filepath, usecols=range(7,num_columns))
+
+    # Print the resulting dataframe
+    print(df_temp)
 
     # Get the number of cells in each row where it doesn't contain a value equals to zero and store it as a value in the next column of df
     df_temp["Non_zero"] = df_temp.iloc[:, :].apply(lambda x: x[x != 0].count(), axis=1)
+    df_temp.to_excel(f"Super_synteny_block_output_non_zero.xlsx",
+            sheet_name="Output", startrow = 0, startcol=0)
 
     # Iterate over each row and get the columnname with max and have it as a value in the next column of df disregarding the last column
     df_temp["subgenome1"] = df_temp.iloc[:, :-1].apply(lambda x: x.sort_values(ascending=False).index[0], axis=1)
@@ -246,9 +257,23 @@ def assign_subgenomes(df_temp, file_path, n_subgenomes):
     for i in range(len(df)):
         if i == 0 and df["Non_zero"][i] == n_subgenomes - 1:
             if df["Non_zero"][i + 1] == n_subgenomes - 1:
-                df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 2, f"subgenome{n_subgenomes}"]
+                if df.at[i + 2, f"subgenome{n_subgenomes}"] != df.at[i, f"subgenome{n_subgenomes-1}"] and df.at[i, f"subgenome{n_subgenomes}"] != df.at[i + 2, f"subgenome{n_subgenomes-2}"]:
+                    df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 2, f"subgenome{n_subgenomes}"]
+                elif df.at[i + 2, f"subgenome{n_subgenomes}"] == df.at[i, f"subgenome{n_subgenomes-1}"]:
+                    df.at[i, f"subgenome{n_subgenomes-1}"] = df.at[i + 2, f"subgenome{n_subgenomes-1}"]
+                    df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 2, f"subgenome{n_subgenomes}"]
+                elif df.at[i, f"subgenome{n_subgenomes}"] == df.at[i + 2, f"subgenome{n_subgenomes-2}"]:
+                    df.at[i, f"subgenome{n_subgenomes-2}"] = df.at[i + 2, f"subgenome{n_subgenomes-2}"]
+                    df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 2, f"subgenome{n_subgenomes}"]
             if df["Non_zero"][i + 1] > n_subgenomes - 1:
-                df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 1, f"subgenome{n_subgenomes}"]
+                if df.at[i + 1, f"subgenome{n_subgenomes}"] != df.at[i, f"subgenome{n_subgenomes-1}"] and df.at[i, f"subgenome{n_subgenomes}"] != df.at[i + 1, f"subgenome{n_subgenomes-2}"]:
+                    df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 1, f"subgenome{n_subgenomes}"]
+                elif df.at[i + 1, f"subgenome{n_subgenomes}"] == df.at[i, f"subgenome{n_subgenomes-1}"]:
+                    df.at[i, f"subgenome{n_subgenomes-1}"] = df.at[i + 1, f"subgenome{n_subgenomes-1}"]
+                    df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 1, f"subgenome{n_subgenomes}"]
+                elif df.at[i, f"subgenome{n_subgenomes}"] == df.at[i + 1, f"subgenome{n_subgenomes-2}"]:
+                    df.at[i, f"subgenome{n_subgenomes-2}"] = df.at[i + 1, f"subgenome{n_subgenomes-2}"]
+                    df.at[i, f"subgenome{n_subgenomes}"] = df.at[i + 1, f"subgenome{n_subgenomes}"]
         elif df["Non_zero"][i] <= n_subgenomes - 1:
             if df["Non_zero"][i] == n_subgenomes - 1:
                 if df.at[i, f"subgenome{n_subgenomes-1}"] != df.at[i-1, f"subgenome{n_subgenomes}"] and df.at[i, f"subgenome{n_subgenomes-2}"] != df.at[i-1, f"subgenome{n_subgenomes}"]:
