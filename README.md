@@ -1,7 +1,7 @@
 SyntenyLink 🧬
 =============
 
-Overview 📖
+[Overview] (#overview) 📖
 ===========
 
 The SyntenyLink package has six major components: the SyntenyLink
