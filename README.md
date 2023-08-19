@@ -420,5 +420,5 @@ placemnet accuracy of each subgenome:
 
 License (MIT) 📜
 ===============
-**MIT License**
+This project is licensed under the /License
 
