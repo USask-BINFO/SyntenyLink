@@ -1,7 +1,7 @@
 SyntenyLink 🧬
 =============
 
-[Overview] (#overview) 📖
+Overview 📖
 ===========
 
 The SyntenyLink package has six major components: the SyntenyLink
@@ -23,7 +23,7 @@ The following is the list of executable programs
 
 **Main programs (in the Scripts folder)**
 
--   SyntenyLink\_bf.pl (#overview)
+-   SyntenyLink\_bf.pl 
 -   SyntenyLink\_st.pl
 -   SyntenyLink\_mbp.py
 -   SyntenyLink\_wg.py
