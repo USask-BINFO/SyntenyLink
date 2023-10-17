@@ -421,6 +421,13 @@ def all_blk(new_df_focus, main_bp_density_rmv):
                 new_sbp.at[k, 'subgenome2'] = main_bp_density_rmv.iloc[-1]['subgenome2']
                 new_sbp.at[k, 'subgenome3'] = main_bp_density_rmv.iloc[-1]['subgenome3']
                 k += 1
+            elif new_sbp.at[k-1, 'Row end #'] != main_bp_density_rmv.iloc[-1]['Row start #']:
+                new_sbp.at[k, 'Row start #'] = new_sbp.at[k-1, 'Row end #']+1
+                new_sbp.at[k, 'Row end #'] = main_bp_density_rmv.iloc[-1]['Row end #']
+                new_sbp.at[k, 'subgenome1'] = main_bp_density_rmv.iloc[-1]['subgenome1']
+                new_sbp.at[k, 'subgenome2'] = main_bp_density_rmv.iloc[-1]['subgenome2']
+                new_sbp.at[k, 'subgenome3'] = main_bp_density_rmv.iloc[-1]['subgenome3']
+                k += 1
     return new_sbp
             
 
