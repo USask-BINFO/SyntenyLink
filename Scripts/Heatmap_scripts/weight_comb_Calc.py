@@ -149,7 +149,7 @@ def calculate_avg_pid(num_blocks, blocks, pid):
     return avg_pid
 
 
-def process_files_weight_cal(chains_file, blastn_file, df_subgenome_density_file_path, df_subgenomes_file_path, synteny_file, pickle_file, num_blocks, n_subgenomes):
+def process_files_weight_cal(chains_file, blastn_file, df_subgenome_density_file_path, df_subgenomes_file_path, synteny_file, pickle_file, n_subgenomes, num_blocks):
     '''
     Processes the files and returns the required dataframes.
     
@@ -167,8 +167,8 @@ def process_files_weight_cal(chains_file, blastn_file, df_subgenome_density_file
     pid_dict: A dictionary containing the PID of each block for each subgenome.
     avg_pid_dict: A dictionary containing the average PID of each block for each subgenome.
     '''
-
     # read the blastn file
+    print(num_blocks)
     blastn = pd.read_csv(blastn_file, sep="\t", header=None)
     df_blastn = blastn.iloc[:, 0:3]
     #have column names for the blastn file as gene_id_Brassica, gene_id_AT, PID
@@ -188,7 +188,6 @@ def process_files_weight_cal(chains_file, blastn_file, df_subgenome_density_file
     df_synteny.index = df_synteny.index - 1
 
     # number of blocks
-
     blocks= get_blocks(df_subgenome_density, df_synteny, num_blocks, n_subgenomes)
     density = calculate_density(blocks, num_blocks)
     chains_dict = create_chains_dict(df_chains)
@@ -206,7 +205,7 @@ def create_graph_input(chains_file, blastn_file, C_df_csv, n_subgenomes, num_blo
     '''
     # subgenome_density_files = [f"subgenome_density_bra_sub{i+1}.xlsx" for i in range(n_subgenomes)]
     # pid_genes_removed_files = [f"pid_genes_removed_blastn_sub{i+1}.pickle" for i in range(n_subgenomes)]
-    graph_input = process_files_weight_cal(chains_file, blastn_file, "Super_synteny_bl_sub_placement_density.xlsx", "Super_synteny_bl_sub_placement_density.xlsx", C_df_csv.iloc[:,:-3], f"{first_letter_get}_pid_blastn_sinapis.pickle", num_blocks, n_subgenomes)
+    graph_input = process_files_weight_cal(chains_file, blastn_file, "Super_synteny_bl_sub_placement_density.xlsx", "Super_synteny_bl_sub_placement_density.xlsx", C_df_csv.iloc[:,:-3], f"{first_letter_get}_pid_blastn_bra_revise.pickle", num_blocks, n_subgenomes)
     return graph_input
 
 def create_block_graph(blocks, density, chains, avg_pid, num_subgenomes):
@@ -508,7 +507,6 @@ def node_traverse_most_weighted_path(n_subgenomes, subgenome_density_file_path, 
     # Get input from command line
     weight_1 = float(W1)
     weight_2 = float(W2)
-
     # Get input from files
     subgenome_density = pd.read_excel(subgenome_density_file_path)
     # Create graph with edge weights and get nodes for first subgenome
@@ -548,18 +546,18 @@ def node_traverse_most_weighted_path(n_subgenomes, subgenome_density_file_path, 
 
     return nodes_df
 
-def get_weight_accuracy(n_subgenomes, subgenome_density_file_path, nodes_file_path, GT, df_synteny, chains_file, blastp_file, C_df_csv):
+def get_weight_accuracy(num_blocks,n_subgenomes, subgenome_density_file_path, nodes_file_path, GT, df_synteny, chains_file, blastp_file, C_df_csv, first_letter_get):
     best_params = []
     accuracies = [[[[] for _ in range(n_subgenomes)] for _ in range(20)] for _ in range(20)]
     for w1 in range(1, 21):
         for w2 in range(1, 21):
             weight_1 = round(w1 * 0.05, 2)
             weight_2 = round(w2 * 0.05, 2)
-            node_traverse_most_weighted_path(n_subgenomes, subgenome_density_file_path, nodes_file_path, float(weight_1), float(weight_2), process_files_weight_cal(chains_file, blastp_file, "subgenome_density_bra.xlsx", "subgenome_density_bra.xlsx", C_df_csv.iloc[1:,:-3], "pid_blastn_bra_21_61.pickle"))
+            node_traverse_most_weighted_path(n_subgenomes, subgenome_density_file_path, nodes_file_path, float(weight_1), float(weight_2), process_files_weight_cal(chains_file, blastp_file, "Super_synteny_bl_sub_placement_density.xlsx", "Super_synteny_bl_sub_placement_density.xlsx", C_df_csv.iloc[1:,:-3], f"{first_letter_get}_pid_blastn_bra_revise.pickle",n_subgenomes, num_blocks))
 
             for k in range(n_subgenomes):
                 print(weight_1, weight_2)
-                acc = accur.subgenome_overlap(GT, nodes_file_path, df_synteny, n_subgenomes, k)
+                acc = accur.subgenome_overlap(GT, nodes_file_path, df_synteny, n_subgenomes, k, first_letter_get)
                 if k == 0:
                     wandb.log({"acc_sub1": acc, "w1_sub1": w1, "w2_sub1": w2, "subgenome": k+1})
                 elif k == 1:
