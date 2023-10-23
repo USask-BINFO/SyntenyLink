@@ -19,7 +19,7 @@ import weight_comb_Calc as wcc
 os.environ["WANDB_SILENT"] = "true"
 time_stamp = time.strftime("%m%d-%H%M")
 # start a new wandb run to track this script
-wandb.init(project="brassica_parameters_sinapis", name=str(time_stamp))
+wandb.init(project="brassica_parameters_revised_B.rapa", name=str(time_stamp))
 
 def main(gap_thresholds, min_block_lengths, y = 0):
     #get the input file as an argument (collinear file)
@@ -116,7 +116,7 @@ def main(gap_thresholds, min_block_lengths, y = 0):
 
         num_blocks_main = len(pd.read_excel("Super_synteny_bl_sub_placement_density.xlsx"))      
 
-        max_parameters = wcc.get_weight_accuracy(n_subgenomes,"Super_synteny_bl_sub_placement_density.xlsx", "Super_synteny_graph_nodes_sub.xlsx", GT, df_synteny, chains_file, blastn_file, C_df_new)
+        max_parameters = wcc.get_weight_accuracy(num_blocks_main,n_subgenomes, "Super_synteny_bl_sub_placement_density.xlsx", "Super_synteny_graph_nodes_sub.xlsx", GT, df_synteny, chains_file, blastn_file, C_df_new,first_letter_get)
         print(max_parameters)
 
 # Get the gap thresholds as command line arguments
