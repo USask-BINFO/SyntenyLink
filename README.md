@@ -160,12 +160,17 @@ Note: After getting the abc\_blast\_filtered.txt file update query
 start, query end, subject start and subject end values incoorperating
 gene locus data from bed files of baseline species and polyploid species
 of interest. Then add chromosome which each gene belongs to in the bed
-file of each species before using DAGchainer.
+file of each species before using DAGchainer. In order to do this, you can use transform_blast_to_dagchainer.py python script as follows:
+
+    $ python3 dir/transform_blast_to_dagchainer.py dir/abc_blast_filtered_modified.txt dir/query.bed (or dir/query.gff3) dir/subject.bed (or dir/subject.gff3)
+
+When you run above python script it will generate an output file named transformed_blast_output_with_selected_columns.blast
+Use this for dagchainer step
 
 Here is a typical parameter setting for generating the
 abc\_synteny.aligncoords file:
 
-    $ ./run_DAG_chainer.pl -i dir/abc_blast_filtered_modified.txt -s -I
+    $ ./run_DAG_chainer.pl -i dir/transformed_blast_output_with_selected_columns.blast -s -I
 
 The abc\_synteny.aligncoords file holds pairwise synteny blocks after
 running DAGchainer :
