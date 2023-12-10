@@ -98,6 +98,26 @@ def split_df(C_df_updated, gap_thresholds, k= 0):
         print("Mean Frequency:", mean_frequency)
         print("Median Frequency:", median_frequency)
 
+        # New condition: Consider block lengths only greater than 100 if mean frequency is less than 600
+        if median_length < 600:
+            filtered_lengths = filtered_lengths[filtered_lengths > 100]
+            unique_lengths, length_counts = np.unique(filtered_lengths, return_counts=True)
+            # Recalculate maximum, mean, and median block lengths and their frequencies
+            max_length = unique_lengths[np.argmax(length_counts)]
+            mean_length = np.mean(unique_lengths)
+            median_length = np.median(unique_lengths)
+
+            max_frequency = np.max(length_counts)
+            mean_frequency = np.mean(length_counts)
+            median_frequency = np.median(length_counts)
+
+            print("Updated Block Length for Maximum Frequency:", max_length)
+            print("Updated Block Length for Mean Frequency:", mean_length)
+            print("Updated Block Length for Median Frequency:", median_length)
+            print("Updated Max Frequency:", max_frequency)
+            print("Updated Mean Frequency:", mean_frequency)
+            print("Updated Median Frequency:", median_frequency)
+
         # Calculate the maximum frequency block length
         max_length = unique_lengths[np.argmax(length_counts)]
         max_frequency = np.max(length_counts)
