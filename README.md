@@ -164,8 +164,7 @@ file of each species before using DAGchainer. In order to do this, you can use t
 
     $ python3 dir/transform_blast_to_dagchainer.py dir/abc_blast_filtered_modified.txt dir/query.bed (or dir/query.gff3) dir/subject.bed (or dir/subject.gff3)
 
-When you run above python script it will generate an output file named transformed_blast_output_with_selected_columns.blast
-Use this for dagchainer step
+When you run above python script it will generate an output file named transformed_blast_output_with_selected_columns.blast. Use this for dagchainer step.
 
 Here is a typical parameter setting for generating the
 abc\_synteny.aligncoords file:
