@@ -436,9 +436,7 @@ blocks in subgenomes:
 This holds the main script that runs all the above scripts in order. It
 takes in the following parameters: -i input\_file -g gap\_threshold -m
 minimum\_block\_length -n number\_of\_subgenomes -gt ground\_truth\_file
--c chains\_file -bl blastn\_file -a1 adjusment1 -a2 adjusment2 -ws1
-window\_size\_subgenome1 -ws2 window\_size\_subgenome2 -ws3
-window\_size\_subgenome3 -wup window\_up -wdwn window\_down
+-c chains\_file -bl blastn\_file 
 
 Note: Before running main\_script.py, you need to run the
 SyntenyLink\_bf.pl and SyntenyLink\_st.pl scripts
