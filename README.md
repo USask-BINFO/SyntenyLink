@@ -68,7 +68,7 @@ pip install -r requirements.txt
 3. Reproduce all the experiments:
 
 ```bash
-python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast -w1s1 -w2s1 -w1s2 -w2s2 -w1s3 -w2s3
+python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
 ```
 ## Usage 🚀
 =============
@@ -304,11 +304,10 @@ after removing the noise taking density threshold into account:
 This program uses a weighted direct graph to dynamically link blocks
 produced from Step 3 that are most likely to be in a subgenome using a
 combined information of fractionation and substitution patterns as well
-as continuity of gene chains. This algorithm takes two input parameters
-a1 and a2.
+as continuity of gene chains. 
 
 \- Usage Reads in two data files: abc\_synteny.all.chains and
-abc\_blastn.blast. Two input parameters:a1 and a2.
+abc\_blastn.blast.
 
 Note: You need to generate abc\_blastn.blast file by running nucleotide
 blast using cds fasta files of baseline species and polyploid species of
@@ -325,9 +324,6 @@ file:
     $ makeblastdb -in ref_cds.fa -dbtype prot -out ref_cds
 
     $ blastall -i query_cds.fasta -p blastn -d ref_cds -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc_blastn.blast -a 4
-
-Note: You need to select the most suitable a1 and a2 parameter values
-for your data, which accounts for adjusting weights of the graph.
 
 \- Output The execution of SyntenyLink\_wg outputs number of output
 files matching the number of subgenomes in the species of interest:
@@ -449,7 +445,7 @@ SyntenyLink\_bf.pl and SyntenyLink\_st.pl scripts
 
 To run SyntenyLink\_sb.py you can simply use:
 
-    $ python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast -a1 -a1 -a1 -a2 -a2 -a2 -ws1 -ws2 -ws3 -wup -wdwn
+    $ python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
 
 \- Output The execution of main\_script outputs all the output files of
 the above scripts in the same directory as the input file.
