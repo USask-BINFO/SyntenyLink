@@ -294,7 +294,7 @@ def assign_subgenomes(df_temp, file_path, n_subgenomes):
                         df.at[i, f"subgenome{n_subgenomes-2}"] = df.at[i - 1, f"subgenome{n_subgenomes-1}"]
                         df.at[i, f"subgenome{n_subgenomes}"] = df.at[i - 1, f"subgenome{n_subgenomes}"]
         
-            if df["Non_zero"][i] == n_subgenomes - 2:
+            if df["Non_zero"][i] == n_subgenomes - 2 and i>0:
                 if df.at[i, f"subgenome{n_subgenomes-2}"] != df.at[i-1, f"subgenome{n_subgenomes}"] and df.at[i, f"subgenome{n_subgenomes-2}"] != df.at[i-1, f"subgenome{n_subgenomes-1}"]:
                     df.at[i, f"subgenome{n_subgenomes-1}"] = df.at[i - 1, f"subgenome{n_subgenomes-1}"]
                     df.at[i, f"subgenome{n_subgenomes}"] = df.at[i - 1, f"subgenome{n_subgenomes}"]
@@ -307,7 +307,7 @@ def assign_subgenomes(df_temp, file_path, n_subgenomes):
                     df.at[i, f"subgenome{n_subgenomes-1}"] = df.at[i - 1, f"subgenome{n_subgenomes-1}"]
                     df.at[i, f"subgenome{n_subgenomes}"] = df.at[i - 1, f"subgenome{n_subgenomes}"]
                 
-            if df["Non_zero"][i] == n_subgenomes - 3:
+            if df["Non_zero"][i] == n_subgenomes - 3 and i>0:
                 df.at[i, f"subgenome{n_subgenomes-2}"] = df.at[i - 1, f"subgenome{n_subgenomes-2}"]
                 df.at[i, f"subgenome{n_subgenomes-1}"] = df.at[i - 1, f"subgenome{n_subgenomes-1}"]
                 df.at[i, f"subgenome{n_subgenomes}"] = df.at[i - 1, f"subgenome{n_subgenomes}"]
