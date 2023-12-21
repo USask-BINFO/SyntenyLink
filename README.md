@@ -56,7 +56,7 @@ To use SyntenyLink, ensure you have the following requirements:
 
 ```bash
 git clone https://git.cs.usask.ca/qnm481/syntenylink.git
-cd SyntenyLink
+cd syntenylink
 ```
 
 2. Install the required dependencies:
