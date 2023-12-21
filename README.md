@@ -68,7 +68,7 @@ pip install -r requirements.txt
 3. Reproduce all the experiments:
 
 ```bash
-python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
+python3 main_script_no_GT.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
 ```
 ## Usage 🚀
 =============
@@ -90,7 +90,7 @@ The following is the list of executable programs
 4. [SyntenyLink\_wg.py](#syntenyLink\_wg.py)
 5. [SyntenyLink\_sb.py](#syntenyLink\_sb.py)
 6. [SyntenyLink\_mn.py](#syntenyLink\_mn.py)
-7. [main\_script.py](#main\_script.py)
+7. [main\_script\_no\_GT.py](#main\_script\_no\_GT.py)
 8. [SyntenyLink\_acc.py](#syntenyLink\_acc.py)
 9. [gap\_threshold\_selection.py](#gap\_threshold\_selection.py)
 12. [minimum\_block\_length\_selection.py](#[minimum\_block\_length\_selection.py)
@@ -438,12 +438,12 @@ takes in the following parameters: -i input\_file -g gap\_threshold -m
 minimum\_block\_length -n number\_of\_subgenomes -gt ground\_truth\_file
 -c chains\_file -bl blastn\_file 
 
-Note: Before running main\_script.py, you need to run the
+Note: Before running main\_script\_no\_GT.py, you need to run the
 SyntenyLink\_bf.pl and SyntenyLink\_st.pl scripts
 
 To run SyntenyLink\_sb.py you can simply use:
 
-    $ python3 main_script.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
+    $ python3 main_script_no_GT.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
 
 \- Output The execution of main\_script outputs all the output files of
 the above scripts in the same directory as the input file.
