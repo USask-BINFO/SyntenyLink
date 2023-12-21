@@ -67,8 +67,14 @@ pip install -r requirements.txt
 
 3. Reproduce all the experiments:
 
+If groundtruth subgenome separations are available:
 ```bash
-python3 main_script_no_GT.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
+python3 main_script.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
+```
+
+If no groundtruth subgenome separations are available:
+```bash
+python3 main_script_no_GT.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -c abc_synteny.all.chains -bl abc_blastn.blast
 ```
 ## Usage 🚀
 =============
@@ -90,7 +96,7 @@ The following is the list of executable programs
 4. [SyntenyLink\_wg.py](#syntenyLink\_wg.py)
 5. [SyntenyLink\_sb.py](#syntenyLink\_sb.py)
 6. [SyntenyLink\_mn.py](#syntenyLink\_mn.py)
-7. [main\_script\_no\_GT.py](#main\_script\_no\_GT.py)
+7. [main\_script.py](#main\_script.py)
 8. [SyntenyLink\_acc.py](#syntenyLink\_acc.py)
 9. [gap\_threshold\_selection.py](#gap\_threshold\_selection.py)
 12. [minimum\_block\_length\_selection.py](#[minimum\_block\_length\_selection.py)
@@ -306,25 +312,6 @@ produced from Step 3 that are most likely to be in a subgenome using a
 combined information of fractionation and substitution patterns as well
 as continuity of gene chains. 
 
-\- Usage Reads in two data files: abc\_synteny.all.chains and
-abc\_blastn.blast.
-
-Note: You need to generate abc\_blastn.blast file by running nucleotide
-blast using cds fasta files of baseline species and polyploid species of
-interest.
-
-The abc\_blastn.blast file holds blast hits after running blastn between
-baseline species and polyploid species of interest:
-
-    BraA01g000010.3C    AT1G43860.1 78.706  371 25  6   239 558 692 1059    7.94e-91    335
-
-Here is a typical parameter setting for generating the abc\_blastn.blast
-file:
-
-    $ makeblastdb -in ref_cds.fa -dbtype prot -out ref_cds
-
-    $ blastall -i query_cds.fasta -p blastn -d ref_cds -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc_blastn.blast -a 4
-
 \- Output The execution of SyntenyLink\_wg outputs number of output
 files matching the number of subgenomes in the species of interest:
 Super\_synteny\_graph\_nodes\_sub{k}.xlsx. There will be m number of
@@ -396,11 +383,6 @@ The algorithm utilizes two window sizes, up and down, which determine
 the number of blocks above and below a given block, to define a
 neighbourhood.
 
-\- Usage No read in files Two input parameters: wup wdwn.
-
-Note: You need to select the most suitable window up and window down
-parameters.
-
 \- Output The execution of SyntenyLink\_sb outputs number of output
 files: Final\_subgenome\_placement\_result.xlsx, Final\_result.xlsx.
 
@@ -438,12 +420,18 @@ takes in the following parameters: -i input\_file -g gap\_threshold -m
 minimum\_block\_length -n number\_of\_subgenomes -gt ground\_truth\_file
 -c chains\_file -bl blastn\_file 
 
-Note: Before running main\_script\_no\_GT.py, you need to run the
+Note: Before running main script, you need to run the
 SyntenyLink\_bf.pl and SyntenyLink\_st.pl scripts
 
-To run SyntenyLink\_sb.py you can simply use:
+To run main you can simply use:
 
-    $ python3 main_script_no_GT.py -i abc_synteny.success.colinear -g -m -n -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
+If groundtruth subgenome separations are available:
+
+    $ python3 main_script.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
+
+If no groundtruth subgenome separations are available:
+
+    $ python3 main_script_no_GT.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -c abc_synteny.all.chains -bl abc_blastn.blast
 
 \- Output The execution of main\_script outputs all the output files of
 the above scripts in the same directory as the input file.
@@ -456,7 +444,7 @@ placement of genes in subgenomes when there is a ground truth file.
 
 \- Usage One read in file: abc\_groundtruth.xlsx
 
-To run SyntenyLink\_sb.py you can simply use:
+To run SyntenyLink\_acc.py you can simply use:
 
     $ python3 SyntenyLink_acc.py abc_groundtruth.xlsx
 
