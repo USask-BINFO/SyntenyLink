@@ -103,35 +103,35 @@ def calculate_pid(blocks, df, num_blocks, pickle_file):
     dict: A dictionary containing the PID of each block for each subgenome.
     '''
     #Remove dot and number after dot in gene_id_AT
-    # df["gene_id_AT"] = [re.sub(r"\.\d+", "", gene_id) for gene_id in df["gene_id_AT"]]
+    df["gene_id_AT"] = [re.sub(r"\.\d+", "", gene_id) for gene_id in df["gene_id_AT"]]
 
-    # # Initialize the dictionary "pid"
-    # pid = {}
-    # for i in range(num_blocks):
-    #     pid[i] = {}
-    #     for j in range(len(blocks[i])):
-    #         key = list(blocks[i].keys())[j]
-    #         block = blocks[i][key]
-    #         pid_values = []
-    #         for sub_key in block.keys():
-    #             if sub_key in df["gene_id_AT"].tolist():
-    #                 val = block[sub_key]
-    #                 # Create a dictionary to store gene_id as keys and PID as values
-    #                 gene_id_to_pid = dict(zip(zip(df["gene_id_Brassica"], df["gene_id_AT"]), df["PID"]))
-    #                 if val!="x":
-    #                     brassica_id = df.loc[(df["gene_id_AT"] == sub_key) & (df["gene_id_Brassica"] == val), "gene_id_Brassica"].values
-    #                     pid_val = gene_id_to_pid.get((brassica_id[0], sub_key), "x") if len(brassica_id) > 0 and val != "x" else "x"
-    #                 else:
-    #                     pid_val = "x"
-    #                 pid_values.append(pid_val)
-    #         pid[i][key] = pid_values
-    # #save in pickle file
-    # with open(pickle_file, "wb") as f:
-    #     pickle.dump(pid, f)
+    # Initialize the dictionary "pid"
+    pid = {}
+    for i in range(num_blocks):
+        pid[i] = {}
+        for j in range(len(blocks[i])):
+            key = list(blocks[i].keys())[j]
+            block = blocks[i][key]
+            pid_values = []
+            for sub_key in block.keys():
+                if sub_key in df["gene_id_AT"].tolist():
+                    val = block[sub_key]
+                    # Create a dictionary to store gene_id as keys and PID as values
+                    gene_id_to_pid = dict(zip(zip(df["gene_id_Brassica"], df["gene_id_AT"]), df["PID"]))
+                    if val!="x":
+                        brassica_id = df.loc[(df["gene_id_AT"] == sub_key) & (df["gene_id_Brassica"] == val), "gene_id_Brassica"].values
+                        pid_val = gene_id_to_pid.get((brassica_id[0], sub_key), "x") if len(brassica_id) > 0 and val != "x" else "x"
+                    else:
+                        pid_val = "x"
+                    pid_values.append(pid_val)
+            pid[i][key] = pid_values
+    #save in pickle file
+    with open(pickle_file, "wb") as f:
+        pickle.dump(pid, f)
 
     #load from pickle file
-    with open(pickle_file, "rb") as f:
-        pid = pickle.load(f)
+    # with open(pickle_file, "rb") as f:
+    #     pid = pickle.load(f)
     return pid
 
 def calculate_avg_pid(num_blocks, blocks, pid):
