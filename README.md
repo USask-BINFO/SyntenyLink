@@ -77,8 +77,16 @@ blastall -i query_pep.fasta -p blastp -d ref_pep -m 8 -e 1e-5 -F F -v 5 -b 5 -o 
 ```bash
 ./SyntenyLink_bf.pl dir/abc.blast
 ```
+ii. Run blastn
 
-ii. Run DAGchainer
+```bash
+makeblastdb -in ref_cds.fa -dbtype nucl -out ref_cds
+```
+```bash
+blastall -i query_cds.fasta -p blastn -d ref_cds -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc_cds.blast -a 4
+```
+
+iii. Run DAGchainer
 
 ```bash
 python3 dir/transform_blast_to_dagchainer.py dir/abc_blast_filtered_modified.txt dir/query.bed (or dir/query.gff3) dir/subject.bed (or dir/subject.gff3)
@@ -87,7 +95,7 @@ python3 dir/transform_blast_to_dagchainer.py dir/abc_blast_filtered_modified.txt
 ./run_DAG_chainer.pl -i dir/transformed_blast_output_with_selected_columns.blast -s -I
 ```
 
-iii. Run syntenyLink
+iv. Run syntenyLink
 
 ```bash
 python3 gap_threshold_selection.py -i abc_synteny.success.colinear
