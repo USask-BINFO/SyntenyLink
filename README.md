@@ -66,16 +66,47 @@ pip install -r requirements.txt
 ```
 
 3. Reproduce all the experiments:
+i. Run blastp
+
+```bash
+makeblastdb -in ref_pep.fa -dbtype prot -out ref_pep
+```
+```bash
+blastall -i query_pep.fasta -p blastp -d ref_pep -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc.blast -a 4
+```
+```bash
+./SyntenyLink_bf.pl dir/abc.blast
+```
+
+ii. Run DAGchainer
+
+```bash
+python3 dir/transform_blast_to_dagchainer.py dir/abc_blast_filtered_modified.txt dir/query.bed (or dir/query.gff3) dir/subject.bed (or dir/subject.gff3)
+```
+```bash
+./run_DAG_chainer.pl -i dir/transformed_blast_output_with_selected_columns.blast -s -I
+```
+
+iii. Run syntenyLink
+
+```bash
+python3 gap_threshold_selection.py -i abc_synteny.success.colinear
+```
+```bash
+python3 minimum_block_length_selection.py -i abc_synteny.success.colinear -g <output gap threshold value>
+```
 
 If groundtruth subgenome separations are available:
 ```bash
 python3 main_script.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
 ```
+OR
 
 If no groundtruth subgenome separations are available:
 ```bash
 python3 main_script_no_GT.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -c abc_synteny.all.chains -bl abc_blastn.blast
 ```
+
 ## Usage 🚀
 =============
 
