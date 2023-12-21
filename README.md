@@ -65,7 +65,7 @@ cd syntenylink
 pip install -r requirements.txt
 ```
 
-## Commands to run SyntenyLink 🚀
+## How to use SyntenyLink 🚀
 =============
 
 3. Reproduce all the experiments:
