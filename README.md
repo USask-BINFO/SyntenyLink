@@ -67,6 +67,7 @@ pip install -r requirements.txt
 
 ## Commands to run SyntenyLink 🚀
 =============
+
 3. Reproduce all the experiments:
 i. Run blastp
 
@@ -117,7 +118,7 @@ If no groundtruth subgenome separations are available:
 python3 main_script_no_GT.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -c abc_synteny.all.chains -bl abc_blastn.blast
 ```
 
-## Usage 🚀
+## More information 🚀
 =============
 
 Utilize this repository to replicate our experiments and explore the functionalities of SyntenyLink. The codebase is organized to help you easily navigate through different components and reproduce our results.
