@@ -508,19 +508,19 @@ def node_traverse_most_weighted_path(GT, n_subgenomes, df_synteny, chains_file, 
     # Create graph with edge weights and get nodes for first subgenome
     # Get input from command line
     for k in range(n_subgenomes):
-        if k == 0:
-            weight_1 = float(sys.argv[sys.argv.index('-w1s1') + 1])
-            weight_2 = float(sys.argv[sys.argv.index('-w2s1') + 1])
-        if k == 1:
-            weight_1 = float(sys.argv[sys.argv.index('-w1s2') + 1])
-            weight_2 = float(sys.argv[sys.argv.index('-w2s2') + 1])
-        if k == 2:
-            weight_1 = float(sys.argv[sys.argv.index('-w1s3') + 1])
-            weight_2 = float(sys.argv[sys.argv.index('-w2s3') + 1])
+        # if k == 0:
+        #     weight_1 = float(sys.argv[sys.argv.index('-w1s1') + 1])
+        #     weight_2 = float(sys.argv[sys.argv.index('-w2s1') + 1])
+        # if k == 1:
+        #     weight_1 = float(sys.argv[sys.argv.index('-w1s2') + 1])
+        #     weight_2 = float(sys.argv[sys.argv.index('-w2s2') + 1])
+        # if k == 2:
+        #     weight_1 = float(sys.argv[sys.argv.index('-w1s3') + 1])
+        #     weight_2 = float(sys.argv[sys.argv.index('-w2s3') + 1])
         # Get input from files
         subgenome_density = pd.read_excel(subgenome_density_files)
         graph_input = create_graph_input(chains_file, blastn_file, C_df_csv, n_subgenomes, num_blocks, first_letter_get)
-        graph = add_edge_weights(graph_input[0], create_block_graph(graph_input[0], graph_input[1], graph_input[2], graph_input[4], n_subgenomes), weight_1, len(graph_input[0]))
+        graph = create_block_graph(graph_input[0], graph_input[1], graph_input[2], graph_input[4], n_subgenomes)
         #get the first value in subgenome1 column (first row) in subgenome_density file as start node
         start_node = f"0_{subgenome_density.iloc[0]['subgenome1']}"
         #get the last value in subgenome1 column (last row) in subgenome_density file as end node
@@ -532,7 +532,7 @@ def node_traverse_most_weighted_path(GT, n_subgenomes, df_synteny, chains_file, 
         nodes_df = pd.DataFrame({"nodes_sub1": nodes_sub1}) # Define the nodes_df variable here
         for i in range(n_subgenomes - 1):
             graph, blocks = remove_nodes_from_graph(nodes_sub1, graph, blocks)
-            graph = update_graph_edges(len(blocks), blocks, graph, weight_2)
+            # graph = update_graph_edges(len(blocks), blocks, graph, weight_2)
             start_node = f"0_{subgenome_density.iloc[0][f'subgenome{i+2}']}"
             end_node = f"{len(subgenome_density)-1}_{subgenome_density.iloc[-1][f'subgenome{i+2}']}"
             nodes_sub = get_nodes(start_node, end_node, len(blocks), graph)
