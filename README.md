@@ -31,13 +31,13 @@ restrictions.
 ## Requirements 🛠️
 =============
 
-To use SyntenyLink, ensure you have the following requirements:
+To use SyntenyLink, ensure you have the following requirements and python packages:
 
-- Python 3.9
+- Python
 - biopython==1.80
 - ipython==8.3.0
 - matplotlib==3.5.2
-- numpy==1.21.5
+- numpy
 - pandas==1.4.2
 - seaborn==0.11.2
 - pickle
