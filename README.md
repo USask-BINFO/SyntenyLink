@@ -65,6 +65,8 @@ cd syntenylink
 pip install -r requirements.txt
 ```
 
+## Commands to run SyntenyLink 🚀
+=============
 3. Reproduce all the experiments:
 i. Run blastp
 
