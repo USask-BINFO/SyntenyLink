@@ -33,13 +33,12 @@ restrictions.
 
 To use SyntenyLink, ensure you have the following requirements and python packages:
 
-- Python
-- biopython==1.80
-- ipython==8.3.0
-- matplotlib==3.5.2
+- biopython
+- ipython
+- matplotlib
 - numpy
-- pandas==1.4.2
-- seaborn==0.11.2
+- pandas
+- seaborn
 - pickle
 - csv
 - os
@@ -75,6 +74,7 @@ i. Run blastp
 makeblastdb -in ref_pep.fa -dbtype prot -out ref_pep
 ```
 ```bash
+(install legacy blast: conda install bioconda::blast-legacy)
 blastall -i query_pep.fasta -p blastp -d ref_pep -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc.blast -a 4
 ```
 ```bash
