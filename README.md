@@ -78,7 +78,7 @@ makeblastdb -in ref_pep.fa -dbtype prot -out ref_pep
 blastall -i query_pep.fasta -p blastp -d ref_pep -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc.blast -a 4
 ```
 ```bash
-./SyntenyLink_bf.pl dir/abc.blast
+./SyntenyLink_bf.pl dir/abc.blast > dir/abc_blast_filtered_modified.txt
 ```
 ii. Run blastn
 
