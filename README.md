@@ -32,7 +32,7 @@ restrictions.
 =============
 
 To use SyntenyLink, ensure you have the following requirements and python packages:
-Python packages:
+### Python packages:
 
     - Python
     - biopython
@@ -49,7 +49,8 @@ Python packages:
     - re
     - warnings
 
-Other tools:
+### Other tools:
+
     - makeblastdb
     - blastall
     - dagchainer
