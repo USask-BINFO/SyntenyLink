@@ -32,22 +32,27 @@ restrictions.
 =============
 
 To use SyntenyLink, ensure you have the following requirements and python packages:
+Python packages:
 
-- Python
-- biopython==1.80
-- ipython==8.3.0
-- matplotlib==3.5.2
-- numpy
-- pandas==1.4.2
-- seaborn==0.11.2
-- pickle
-- csv
-- os
-- math
-- sys
-- re
-- warnings
-- wandb
+    - Python
+    - biopython
+    - ipython
+    - matplotlib
+    - numpy
+    - pandas
+    - seaborn
+    - pickle
+    - csv
+    - os
+    - math
+    - sys
+    - re
+    - warnings
+
+Other tools:
+    - makeblastdb
+    - blastall
+    - dagchainer
 
 ## Installation ⚙️
 =============
@@ -69,53 +74,10 @@ pip install -r requirements.txt
 =============
 
 3. Reproduce all the experiments:
-i. Run blastp
 
-```bash
-makeblastdb -in ref_pep.fa -dbtype prot -out ref_pep
+i. Run SyntenyLink.sh
 ```
-```bash
-blastall -i query_pep.fasta -p blastp -d ref_pep -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc.blast -a 4
-```
-```bash
-./SyntenyLink_bf.pl dir/abc.blast
-```
-ii. Run blastn
-
-```bash
-makeblastdb -in ref_cds.fa -dbtype nucl -out ref_cds
-```
-```bash
-blastall -i query_cds.fasta -p blastn -d ref_cds -m 8 -e 1e-5 -F F -v 5 -b 5 -o abc_cds.blast -a 4
-```
-
-iii. Run DAGchainer
-
-```bash
-python3 dir/transform_blast_to_dagchainer.py dir/abc_blast_filtered_modified.txt dir/query.bed (or dir/query.gff3) dir/subject.bed (or dir/subject.gff3)
-```
-```bash
-./run_DAG_chainer.pl -i dir/transformed_blast_output_with_selected_columns.blast -s -I
-```
-
-iv. Run syntenyLink
-
-```bash
-python3 gap_threshold_selection.py -i abc_synteny.success.colinear
-```
-```bash
-python3 minimum_block_length_selection.py -i abc_synteny.success.colinear -g <output gap threshold value>
-```
-
-If groundtruth subgenome separations are available:
-```bash
-python3 main_script.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -gt abc_groundtruth.xlsx -c abc_synteny.all.chains -bl abc_blastn.blast
-```
-OR
-
-If no groundtruth subgenome separations are available:
-```bash
-python3 main_script_no_GT.py -i abc_synteny.success.colinear -g <gap threshold value> -m <minimum block length value> -n <number of subgenomes> -c abc_synteny.all.chains -bl abc_blastn.blast
+./SyntenyLink.sh ref_pep.fasta ref_cds.fasta query_pep.fasta query_cds.fasta query.gff3 ref.gff3 ref_genelist.txt query.bed -n <number of subgenomes> -s <ploidy status> -chr1 <query chromosome number for subgenome1> -p <gene prefix> 
 ```
 
 ## More information 🚀
