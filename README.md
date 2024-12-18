@@ -90,12 +90,21 @@ Utilize this repository to replicate our experiments and explore the functionali
 The following is the list of executable programs
 ------------------------------------------------
 
-## Main programs
+## Usage
 =============
 
-**Main program **
+Parameter and command examples are shown below.
 
 1. [SyntenyLink.sh](#syntenyLink.sh) 
+    - -i Input collinear file
+    - -s Ploidy status. If diploid 2, tetraploid 4, hexaploid 6, octaploid 8
+    - -p Gene prefix. 
+    - -gt Groundtruth subgenome separation. Default is None
+    - -bed Query bed file
+    - -chr<i> Chromosome number for each subgenome. For example in Brassica napus chr1 is 10 and chr2 is 9
+    - -n number of subgenomes.
+    - -sub<i> Prefix for subgenome chromosome name. For example in Brassica napus sub1 is A and sub2 is Chromosome
+    - -dag Collinear file created with blastn output
 
 
 
