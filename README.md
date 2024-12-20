@@ -20,6 +20,8 @@ species more conveniently and to separate the set of genes belong to
 each subgenome in the organism with the aid of reference proteomes of
 polyploid species and related ancestor. 🌱
 
+For more details access our published work here: 10.1109/BIBM58861.2023.10385622
+
 ![Pipeline](figs/pipeline_Algo.png)
 
 All programs are executed using command line options on Linux systems or
