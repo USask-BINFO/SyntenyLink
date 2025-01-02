@@ -105,7 +105,7 @@ Parameter and command examples are shown below.
     - -bed Query bed file
     - -chr<i> Chromosome number for each subgenome. For example in Brassica napus chr1 is 10 and chr2 is 9
     - -n number of subgenomes.
-    - -sub<i> Prefix for subgenome chromosome name. For example in Brassica napus sub1 is A and sub2 is Chromosome
+    - -sub<i> Prefix for subgenome chromosome name. For example in Brassica napus sub1 is A and sub2 is C
     - -dag Collinear file created with blastn output
 
 
