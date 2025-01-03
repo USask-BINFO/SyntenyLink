@@ -108,6 +108,8 @@ Parameter and command examples are shown below.
     - -sub<i> Prefix for subgenome chromosome name. For example in Brassica napus sub1 is A and sub2 is C
     - -dag Collinear file created with blastn output
 
+** Note: Use the prefix 'Chr' to name chromosomes in ancestral reference genome and prefix that doesn't start with 'C' to name chromosomes in query genome.
+
 ## Tested species
 =============
 
