@@ -108,7 +108,17 @@ Parameter and command examples are shown below.
     - -sub<i> Prefix for subgenome chromosome name. For example in Brassica napus sub1 is A and sub2 is C
     - -dag Collinear file created with blastn output
 
+## Tested species
+=============
 
+1. _Brassica rapa_
+2. _Brassica oleracea_
+3. _Brassica nigra_
+4. _Brassica napus_
+5. _Brassica carinata_
+6. _Brassica juncea_
+7. _Sinapis alba_
+8. _Cercis canadensis_
 
 ## Contact 📬
 ===============
